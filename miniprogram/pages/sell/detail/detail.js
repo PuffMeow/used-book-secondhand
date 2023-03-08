@@ -116,7 +116,7 @@ Page({
                                                             showCancel: true, 
                                                             cancelText:'下次一定',
                                                             confirmText:'现在就去',
-                                                            confirmColor: '#fbbd08', 
+                                                            confirmColor: '#FFAFD3', 
                                                             success(res) {
                                                                   if (res.confirm) {
                                                                         wx.previewImage({

@@ -1,6 +1,6 @@
 import { VantComponent } from '../common/component';
-const FONT_COLOR = '#ed6a0c';
-const BG_COLOR = '#fffbe8';
+const FONT_COLOR = '#FFAFD3';
+const BG_COLOR = '#FFAFD3';
 VantComponent({
   props: {
     text: {

@@ -48,6 +48,7 @@ function commentTimeHandle(dateStr) {
             return M + '月' + D + '日';
       }
 }
+
 function format(dateStr) {
       var publishTime = dateStr,
             date = getDate(publishTime), //获取dateStr的标准格式 console.log(date) 打印结果  Thu Sep 06 2018 18:47:00 GMT+0800 (中国标准时间)
@@ -74,10 +75,10 @@ function format(dateStr) {
       if (s < 10) {
             s = '0' + s;
       }
-      
-       return Y+'-'+M+'-'+D+' '+H+':'+m
+
+      return Y + '-' + M + '-' + D + ' ' + H + ':' + m
 }
 module.exports = {
       timelog: commentTimeHandle,
-      format:format
+      format: format
 }

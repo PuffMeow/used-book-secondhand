@@ -16,11 +16,11 @@
   margin-right: 120rpx;
   border-width: 20rpx;
   border-style: solid;
-  border-color:  transparent transparent  #fbbd08;
+  border-color:  transparent transparent  #FFAFD3;
 }
 .body {
-  background-color:   #fbbd08;
-  box-shadow: 0 10rpx 20rpx -10rpx   #fbbd08;
+  background-color:   #FFAFD3;
+  box-shadow: 0 10rpx 20rpx -10rpx   #FFAFD3;
   border-radius: 12rpx;
   display: flex;
   align-items: center;
@@ -71,8 +71,8 @@
 .ok-btn > view {
   height: 40px;
   width: 120px;
-  background-color:   #fbbd08;
-  box-shadow: 0 5px 10px -px   #fbbd08;
+  background-color:   #FFAFD3;
+  box-shadow: 0 5px 10px -px   #FFAFD3;
   display: flex;
   align-items: center;
   justify-content: center;

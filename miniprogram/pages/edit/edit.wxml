@@ -20,7 +20,7 @@
             </view>
       </view>
        <van-divider />
-	<van-checkbox value="{{checked}}" checked-color="#fbbd08" bind:change="onChange">
+	<van-checkbox value="{{checked}}" checked-color="#FFAFD3" bind:change="onChange">
 		授权接收订单消息通知
 	</van-checkbox>
       <!--底部确认-->

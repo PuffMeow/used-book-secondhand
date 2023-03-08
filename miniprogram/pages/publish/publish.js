@@ -69,13 +69,13 @@ Page({
                         id: 1,
                         check: false
                   }],
-                  selectPhoto:true
+                  selectPhoto: true
             })
       },
       onLoad() {
             this.initial();
             this.getCodeFromSet();
-            
+
       },
       onShow() {
 
@@ -283,7 +283,7 @@ Page({
                                                             content: '您未上传赞赏码用于交易，是否现在去上传？',
                                                             showCancel: true, //是否显示取消按钮
                                                             cancelText: "稍后再传", //默认是“取消”
-                                                            cancelColor: '#fbbd08', //取消文字的颜色
+                                                            cancelColor: '#FFAFD3', //取消文字的颜色
                                                             success(res) {
                                                                   if (res.confirm) {
                                                                         wx.navigateTo({

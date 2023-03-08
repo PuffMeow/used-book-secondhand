@@ -136,7 +136,7 @@ page {
       text-align: center
 }
 
-.t {
-      margin-left: 26px;
+.nickName {
+      margin-left: 80rpx;
       color: lightskyblue;
 }

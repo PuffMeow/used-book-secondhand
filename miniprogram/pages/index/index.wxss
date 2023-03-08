@@ -1,6 +1,6 @@
 .top_box {
       width: 100%;
-      background: #fbbd08;
+      background: #FFAFD3;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -41,6 +41,7 @@
       box-sizing: border-box;
       height: 240rpx;
 }
+
 /* 
 .banner_image {
       width: auto;
@@ -104,10 +105,10 @@
 }
 
 .tab-on {
-      color: #fbbd08;
+      color: #FFAFD3;
       font-size: 32rpx !important;
       font-weight: 600;
-      border-bottom: 4rpx solid #70f3ff !important;
+      border-bottom: 4rpx solid !important;
 }
 
 .kind_img {
@@ -165,7 +166,7 @@
 }
 
 .list-on {
-      background: #fbbd08;
+      background: #FFAFD3;
       color: #fff;
       border: none !important;
 }

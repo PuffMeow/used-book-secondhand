@@ -1,14 +1,14 @@
 var data = {
       //云开发环境id
-      env: 'taoshaoji-46f0r',
+      env: 'cloud1-1gd6wiir852a2fdd',
       //分享配置
-      share_title: '吉珠二手交易平台',
-      share_img: '/images/poster.jpg', //可以是网络地址，本地文件路径要填绝对位置
-      share_poster:'https://s2.ax1x.com/2019/11/20/Mhpqmt.png',//必须为网络地址
+      // share_title: '重邮',
+      // share_img: '/images/poster.jpg', //可以是网络地址，本地文件路径要填绝对位置
+      // share_poster: 'https://s2.ax1x.com/2019/11/20/Mhpqmt.png', //必须为网络地址
       //客服联系方式
       kefu: {
             qq: '859162716',
-            weixin:'ttao527'
+            weixin: 'ttao527'
       },
       //默认启动页背景图，防止请求失败完全空白 
       //可以是网络地址，本地文件路径要填绝对位置
@@ -120,6 +120,7 @@ function days() {
       let date = year + "" + month + day;
       return date;
 }
+
 module.exports = {
       data: JSON.stringify(data),
       formTime: formTime,

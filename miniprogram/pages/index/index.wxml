@@ -8,7 +8,7 @@
       <image bindtap="changeCard" class="top_list" src="{{iscard?'/images/list.png':'/images/card.png'}}"></image>
 </view>
 <van-notice-bar left-icon="volume-o" text="{{indexTip}}" speed="50" />
-<swiper class="banner" indicator-dots autoplay indicator-active-color="#fbbd08" circular>
+<swiper class="banner" indicator-dots autoplay indicator-active-color="#FFAFD3" circular>
       <block wx:for="{{banner}}" wx:key="id">
             <swiper-item>
                   <image lazy-load src="{{item.img}}" bindtap="goweb" data-web="{{item}}" class="banner_image" mode="aspectFill" />
@@ -16,7 +16,7 @@
       </block>
 </swiper>
 <view class="space"></view>
-<ad unit-id="adunit-1cc91e12e4e9e519" ad-type="grid" grid-opacity="0.8" grid-count="5" ad-theme="white"></ad>
+
 <official-account></official-account>
 <!--分类导航-->
 <view class="{{scrollTop>310?'nofixed':''}}">
@@ -99,4 +99,4 @@
 </van-transition>
 <!--首次进入提示收藏小程序-->
 <tips />
-<welcome />
+<!-- <welcome /> -->

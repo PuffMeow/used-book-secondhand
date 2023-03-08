@@ -45,7 +45,7 @@
 				<view class="b_name">类别</view>
 				<radio-group class="kind-group" bindchange="kindChange">
 					<label class="b_radio" wx:for="{{kind}}" wx:key="id">
-						<radio color="#fbbd08" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
+						<radio color="#FFAFD3" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
 					</label>
 				</radio-group>
 			</view>
@@ -68,7 +68,7 @@
 				<view class="name">取货方式</view>
 				<radio-group class="kind-group" bindchange="delChange">
 					<label class="b_radio" wx:for="{{delivery}}" wx:key="id">
-						<radio color="#fbbd08" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
+						<radio color="#FFAFD3" value="{{item.id}}" checked="{{item.check}}" />{{item.name}}
 					</label>
 				</radio-group>
 			</view>
@@ -94,13 +94,13 @@
 				<van-stepper bind:change="duraChange" value="{{dura}}" min="1" max="50" />
 			</view>
 			<view class="b_tips">
-				<text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示</view>
+				<text>* </text>此时长内您的发布信息将会展示给所有同学，超时后您只需去个人中心处擦亮即可再次展示
+			</view>
 		</view>
 		<view class="b_publish" bindtap="check_pub">马上发布</view>
 	</view>
 </van-transition>
-<text class="font" space="ensp"> 如果你喜欢我们的小程序，支持我们一下，我们才有动力做出更好的功能</text>
-<ad unit-id="adunit-5fed763488239e91" ad-type="video" ad-theme="white"></ad>
+
 
 <!--步骤二-->
 <van-transition show="{{ show_c }}" name="fade-right" custom-class="block" duration="{{entime}}">

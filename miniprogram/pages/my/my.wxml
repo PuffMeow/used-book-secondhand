@@ -30,21 +30,15 @@
 </view>
 <view class="blank"></view>
 <view class="bottom_box">
-	<view class="bottom_card" bindtap="go" data-go="/pages/appreciateCode/appreciateCode" data-status="1">
-		<view class="bottom_1">
-			<image src="/images/appreciate.png"></image>
-			<view>上传赞赏码</view>
-		</view>
-		<image src="/images/go.png"></image>
-	</view>
 
-	<view class="bottom_card" bindtap="go" data-go="/pages/help/help">
+
+	<!-- <view class="bottom_card" bindtap="go" data-go="/pages/help/help">
 		<view class="bottom_1">
 			<image src="/images/illustrate.png"></image>
 			<view>使用说明</view>
 		</view>
 		<image src="/images/go.png"></image>
-	</view>
+	</view> -->
 
 	<view class="bottom_card" bindtap="go" data-go="/pages/about/about">
 		<view class="bottom_1">

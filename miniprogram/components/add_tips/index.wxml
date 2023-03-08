@@ -15,10 +15,10 @@
     <text>2. 点击「添加到我的小程序」</text>
     <image src='./assets/fav-2.jpg' style='width:100%' mode="widthFix"></image>
   </view>
-  <view>
+  <!-- <view>
     <text>3. 微信首页下拉，快速进入小程序</text>
     <image src='./assets/fav-3.jpg' style='width:100%' mode="widthFix"></image>
-  </view>
+  </view> -->
 
   <!-- 知道了 -->
   <view class='ok-btn' hover-class='btn-hover' bindtap='okHandler'>

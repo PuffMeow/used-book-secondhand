@@ -9,10 +9,7 @@ page {
       width: 100%;
       z-index: 9;
 }
-.font{
-      font-size: 23rpx;
-      color: red;
-}
+
 .a_contain {
       padding: 32rpx;
       width: 100%;
@@ -348,7 +345,7 @@ picker {
       display: flex;
       justify-content: center;
       align-items: center;
-      background:#fbbd08;
+      background:#FFAFD3;
       color: #fff;
       border-radius: 40rpx;
       letter-spacing: 4rpx;
@@ -413,7 +410,7 @@ picker {
       width: 500rpx;
       height: 80rpx;
       border-radius: 40rpx;
-      background: #fbbd08;
+      background: #FFAFD3;
       color: #fff;
       display: flex;
       align-items: center;

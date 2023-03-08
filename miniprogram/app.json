@@ -1,7 +1,6 @@
 {
   "cloud": true,
   "pages": [
-    "pages/start/start",
     "pages/index/index",
     "pages/login/login",
     "pages/publish/publish",
@@ -23,10 +22,10 @@
     "pages/appreciateCode/appreciateCode"
   ],
   "window": {
-    "backgroundColor": "#fbbd08",
+    "backgroundColor": "#FFAFD3",
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fbbd08",
-    "navigationBarTitleText": "吉珠二手交易平台",
+    "navigationBarBackgroundColor": "#FFAFD3",
+    "navigationBarTitleText": "贰来贰去",
     "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json",

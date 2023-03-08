@@ -12,7 +12,7 @@ Page({
             adShow: false,
             list: [],
             banner: '',
-            indexTip: '',
+            indexTip: '欢迎光临贰来贰去二手交易平台',
             openid: app.openid
       },
       // 用户点击右上角分享给好友,要先在分享好友这里设置menus的两个参数,才可以分享朋友圈
@@ -34,8 +34,8 @@ Page({
       },
       onLoad() {
             this.listkind();
-            this.getbanner();   
-            
+            this.getbanner();
+
       },
 
       //监测屏幕滚动
@@ -44,8 +44,7 @@ Page({
                   scrollTop: parseInt((e.scrollTop) * wx.getSystemInfoSync().pixelRatio)
             })
       },
-    
-        
+
       //获取上次布局记忆
       listkind() {
             let that = this;
@@ -237,28 +236,20 @@ Page({
                   url: '/pages/web/web?url=' + e.currentTarget.dataset.web.url,
             })
       },
-      onShareAppMessage() {
-            return {
-                  title: JSON.parse(config.data).share_title,
-                  imageUrl: JSON.parse(config.data).share_img,
-                  path: '/pages/start/start'
-            }
-      },
 
       onShow() {
 
-            this.getList(),
-                  this.getTip()
+            this.getList()
+            this.getTip()
       },
 
       getTip() {
             let that = this
             db.collection('Tip').where({}).get({
-                  success: function (res) {
+                  success: res => {
                         that.setData({
                               indexTip: res.data[0].tip
                         })
-                        console.log("zhelishixiaoxi" + res)
                   },
             })
       },

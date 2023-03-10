@@ -335,8 +335,9 @@ Page({
       },
       doUpload(filePath) {
             const that = this;
-            // var timestamp = (new Date()).valueOf();
             const cloudPath = 'goods-pic/' + app.openid + '/' + Math.floor(Math.random() * 10000 + 10000) + '.png';
+
+            console.log('cloudPath', cloudPath)
 
             wx.cloud.uploadFile({
                   cloudPath,

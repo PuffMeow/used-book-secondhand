@@ -222,7 +222,7 @@ Page({
       getbanner() {
             let that = this;
             db.collection('banner').where({}).get({
-                  success: function (res) {
+                  success: res => {
                         that.setData({
                               banner: res.data[0].list
                         })

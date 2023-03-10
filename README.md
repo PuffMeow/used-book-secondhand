@@ -1,4 +1,4 @@
-# Secondary_trading_applet
+# 二手交易小程序
 
 基于微信小程序的校园二手交易平台
 

@@ -243,9 +243,13 @@ Page({
       },
       //跳转轮播链接
       goweb(e) {
+            const url = e.currentTarget.dataset.web.url
             console.log(e.currentTarget.dataset.web.url)
+            if (!url) {
+                  return
+            }
             wx.navigateTo({
-                  url: '/pages/web/web?url=' + e.currentTarget.dataset.web.url,
+                  url: '/pages/web/web?url=' + url,
             })
       },
 

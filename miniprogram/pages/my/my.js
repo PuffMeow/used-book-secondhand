@@ -1,7 +1,7 @@
 const app = getApp();
 const config = require("../../config.js");
+const db = wx.cloud.database();
 Page({
-
       /**
        * 页面的初始数据
        */
@@ -10,21 +10,21 @@ Page({
             poster: JSON.parse(config.data).share_poster,
             username: '',
             openid: '',
-            roomlist: []
+            roomlist: [],
+            userInfo: null
       },
       onShow() {
-            this.setData({
-                  userinfo: app.userinfo
-            })
+
       },
-      onLoad: function (options) {
+      onLoad: function () {
+            const openid = wx.getStorageSync('openid')
+            const userInfo = wx.getStorageSync('userInfo')
             this.setData({
-                  openid: app.openid
+                  openid,
+                  userInfo
             })
-        
       },
       goo() {
-            console.log(app.roomlist);
             if (!app.openid) {
                   wx.showModal({
                         title: '温馨提示',
@@ -38,7 +38,7 @@ Page({
                         }
                   })
                   return false
-            }else{
+            } else {
                   wx.navigateTo({
                         url: '../message/message',
                   })
@@ -80,7 +80,7 @@ Page({
       },
       //预览图片
       preview(e) {
-            
+
             wx.previewImage({
                   urls: e.currentTarget.dataset.link.split(",")
             });
@@ -94,27 +94,27 @@ Page({
 
       },
       // 用户点击右上角分享给好友,要先在分享好友这里设置menus的两个参数,才可以分享朋友圈
-	onShareAppMessage: function() {
-		wx.showShareMenu({
-	      withShareTicket: true,
-	      menus: ['shareAppMessage', 'shareTimeline']
-	    })
-	},
-	//用户点击右上角分享朋友圈
-	onShareTimeline: function () {
-		return {
-	      title: '',
-	      query: {
-	        key: value
-	      },
-	      imageUrl: ''
-	    }
-	},
+      onShareAppMessage: function () {
+            wx.showShareMenu({
+                  withShareTicket: true,
+                  menus: ['shareAppMessage', 'shareTimeline']
+            })
+      },
+      //用户点击右上角分享朋友圈
+      onShareTimeline: function () {
+            return {
+                  title: '',
+                  query: {
+                        key: value
+                  },
+                  imageUrl: ''
+            }
+      },
       //获取授权的点击事件
       shouquan() {
             wx.requestSubscribeMessage({
                   tmplIds: ['6DGzsKqipoPxClnbkvwnxY9GqdXoLordLRdWTjJN1F0'], //这里填入我们生成的模板id
-                  success(res) {          
+                  success(res) {
                         console.log('授权成功', res)
                   },
                   fail(res) {

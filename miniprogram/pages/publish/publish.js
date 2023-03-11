@@ -152,8 +152,7 @@ Page({
       },
       //输入备注
       noteInput(e) {
-            let that = this;
-            that.setData({
+            this.setData({
                   note_counts: e.detail.cursor,
                   notes: e.detail.value,
             })
@@ -222,7 +221,7 @@ Page({
                   });
                   return false;
             }
-            if (that.data.imgUrl == '') {
+            if (that.data.params.imgUrl.length === 0) {
                   wx.showToast({
                         title: '请选择图片',
                         icon: 'none',
@@ -262,44 +261,17 @@ Page({
                                           key: that.data.good,
                                     },
                                     success(e) {
-                                          console.log(e)
+                                          wx.showToast({
+                                                title: '上传成功...',
+                                                icon: 'success',
+                                                mask: true,
+                                                duration: 1000
+                                          })
                                           that.setData({
                                                 show_b: false,
                                                 show_c: true,
                                                 active: 2,
                                                 detail_id: e._id
-                                          });
-                                          wx.showToast({
-                                                title: '正在上传...',
-                                                icon: 'loading',
-                                                mask: true,
-                                                duration: 1000
-                                          })
-                                          setTimeout(function () {
-                                                //判断卖家是否已经上传了赞赏码
-                                                if (that.data.isExist == false) {
-                                                      wx.showModal({
-                                                            title: '商品发布成功',
-                                                            content: '您未上传赞赏码用于交易，是否现在去上传？',
-                                                            showCancel: true, //是否显示取消按钮
-                                                            cancelText: "稍后再传", //默认是“取消”
-                                                            cancelColor: '#FFAFD3', //取消文字的颜色
-                                                            success(res) {
-                                                                  if (res.confirm) {
-                                                                        wx.navigateTo({
-                                                                              url: '/pages/appreciateCode/appreciateCode',
-                                                                        })
-                                                                  }
-                                                            }
-                                                      })
-                                                }
-                                          }, 2000)
-
-                                          that.setData({
-                                                show_b: false,
-                                                show_c: true,
-                                                active: 2,
-                                                detail_id: e._id,
                                           });
                                           //滚动到顶部
                                           wx.pageScrollTo({
@@ -335,9 +307,20 @@ Page({
       },
       doUpload(filePath) {
             const that = this;
+            if (!app.openid) {
+                  wx.showToast({
+                        title: '请先登录',
+                        icon: "none"
+                  })
+                  setTimeout(() => {
+                        wx.navigateTo({
+                              url: 'pages/login/login',
+                        })
+                  }, 1000);
+                  return
+            }
             const cloudPath = 'goods-pic/' + app.openid + '/' + Math.floor(Math.random() * 10000 + 10000) + '.png';
 
-            console.log('cloudPath', cloudPath)
 
             wx.cloud.uploadFile({
                   cloudPath,
@@ -353,7 +336,7 @@ Page({
                   imgUrl.push(res.fileID);
                   params['imgUrl'] = imgUrl;
                   that.setData({
-                        imgUrl,
+                        params
                   });
             }).catch(error => {
                   console.error('[上传文件] 失败：', error);

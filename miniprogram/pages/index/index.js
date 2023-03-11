@@ -32,7 +32,19 @@ Page({
                   imageUrl: ''
             }
       },
-      onLoad() {
+      onLoad: async function () {
+            const openidCache = wx.getStorageSync('openid')
+
+            if (!app.openid && openidCache) {
+                  const res = await db.collection('user').where({
+                        _openid: openidCache
+                  }).get()
+
+                  const userInfo = res.data[0]
+                  app.openid = userInfo._openid
+                  app.userInfo = userInfo.userInfo
+            }
+
             this.listkind();
             this.getbanner();
 

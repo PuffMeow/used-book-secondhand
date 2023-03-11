@@ -2,19 +2,20 @@ const config = require("config.js");
 
 App({
       openid: '',
-      userinfo:'',
-      roomlist:[],
-      canReflect:true,
-      onLaunch: function() {
+      userinfo: '',
+      roomlist: [],
+      canReflect: true,
+      onLaunch: async function (e) {
             if (!wx.cloud) {
                   console.error('请使用 2.2.3 或以上的基础库以使用云能力')
             } else {
                   wx.cloud.init({
-                       env: JSON.parse(config.data).env,
+                        env: JSON.parse(config.data).env,
                         traceUser: true,
                   })
             }
-           this.systeminfo=wx.getSystemInfoSync();
-        
+            this.systeminfo = wx.getSystemInfoSync();
+
+
       }
 })

@@ -8,6 +8,14 @@
       background-size: 100%;
 }
 
+.back {
+      position: absolute;
+      top: 60rpx;
+      left: 45rpx;
+      color: #fff;
+      font-weight: 700;
+}
+
 .contain {
       position: absolute;
       top: 176rpx;

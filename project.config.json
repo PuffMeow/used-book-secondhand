@@ -62,8 +62,7 @@
       "list": []
     },
     "miniprogram": {
-      "list": [
-        {
+      "list": [{
           "id": -1,
           "name": "db guide",
           "pathName": "pages/databaseGuide/databaseGuide",
@@ -174,13 +173,7 @@
           "query": "",
           "scene": null
         },
-        {
-          "id": -1,
-          "name": "【编辑资料】",
-          "pathName": "pages/edit/edit",
-          "query": "",
-          "scene": null
-        },
+
         {
           "id": -1,
           "name": "帮助中心",

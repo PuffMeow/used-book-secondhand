@@ -11,16 +11,8 @@ Page({
   },
 
   onLoad: function (_options) {
-    wx.stopPullDownRefresh({
-      success: (res) => {
-        console.log(res)
-      },
-    })
-    this.init_charList()
-    this.setData({
-      openid: app.openid,
-      roomlist: app.roomlist
-    })
+    wx.stopPullDownRefresh()
+
     if (!app.openid) {
       wx.showModal({
         title: '温馨提示',
@@ -33,92 +25,47 @@ Page({
           }
         }
       })
-      return false
+      return
     }
-    console.log("输出列表用户信息")
-    wx.cloud.init({
-      env: 'taoshaoji-46f0r',
-      traceUser: true
-    });
-    //初始化数据库
-    const db = wx.cloud.database();
-    var list = this.data.roomlist;
-    var that = this;
-    console.log(list);
-    for (var i = 0; i < list.length; i++) {
-      (function (i) {
-        db.collection('user').where({
-          _openid: list[i].openid
-        }).get().then(res => {
-          console.log(res.data[0]);
-          list[i].image = res.data[0].info.avatarUrl;
-          list[i].name = res.data[0].info.nickName;
-          //list[i].name = res.data[0]._id;
-          that.setData({
-            roomlist: list
-          })
-          console.log(list);
-        })
-      })(i);
-    }
+
+
   },
   /*
   页面初始化
   */
-  init_charList() {
-
-    var myid = this.data.openid;
-    var list = []
-    wx.cloud.init({
-      env: 'taoshaoji-46f0r',
-      traceUser: true
-    });
-    //初始化数据库
-    const db = wx.cloud.database();
-
-    console.log("enter A");
-    db.collection('rooms').where({
-      p_s: myid,
+  init_charList: async function () {
+    const myOpenid = app.openid
+    const list = []
+    const res = await db.collection('rooms').where({
+      p_s: myOpenid,
       deleted: 0
-    }).get().then(res => {
-      console.log(res.data);
-      console.log("1111111111111111111");
-      if (res.data.length > 0) {
-        for (var i = 0; i < res.data.length; i++) {
-          var dia = new Object();
-          dia.roomid = res.data[i]._id;
-          dia.openid = res.data[i].p_b;
-          dia.time = "";
-          dia.cha = "买家:";
-          dia.name = "";
-          dia.image = "";
-          list.push(dia);
-          console.log(list);
-          console.log("list111111111111");
-        }
-        app.roomlist = list;
-      }
-    })
+    }).get()
 
-    db.collection('rooms').where({
-      p_b: myid,
-      deleted: 0
-    }).get().then(res => {
-      console.log(res.data);
-      if (res.data.length > 0) {
-        for (var i = 0; i < res.data.length; i++) {
-          var dia = new Object();
-          dia.roomid = res.data[i]._id;
-          dia.openid = res.data[i].p_s;
-          dia.time = "";
-          dia.cha = "卖家:";
-          dia.name = "";
-          dia.image = "";
-          list.push(dia);
-        }
-        app.roomlist = list;
+    if (res.data.length > 0) {
+      for (let i = 0; i < res.data.length; i++) {
+        let dia = {};
+        dia.roomid = res.data[i]._id;
+        dia.openid = res.data[i].p_b;
+        dia.time = "";
+        dia.cha = "买家:";
+        dia.name = "";
+        dia.image = "";
+        list.push(dia);
       }
-    })
+    }
+
+    for (const item of list) {
+      await db.collection('user').where({
+        _openid: item.openid
+      }).get().then(res => {
+        item.image = res.data[0].userInfo.avatarUrl;
+        item.name = res.data[0].userInfo.nickName;
+      })
+    }
+
+    app.roomlist = list;
+
+    return list
   },
 
   /**
@@ -222,8 +169,13 @@ Page({
       url: '../detail/room/room?id=' + e.currentTarget.dataset.id,
     })
   },
-  onShow() {
-    this.init_charList()
+  onShow: async function () {
+    const list = await this.init_charList()
+    console.log('list;', list)
+    this.setData({
+      openid: app.openid,
+      roomlist: app.roomlist
+    })
   },
   //下拉刷新
   onPullDownRefresh() {
@@ -259,7 +211,7 @@ Page({
             name: "sendTip",
             data: {
               openid: e.currentTarget.dataset.opid,
-              nickName: that.data.myNickName.info.nickName,
+              nickName: that.data.myNickName.userInfo.nickName,
               tip: "快去消息中心看看吧！"
             }
           }).then(res => {

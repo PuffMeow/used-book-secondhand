@@ -192,7 +192,7 @@ Page({
             }).get().then(res => {
                   console.log(res.data[0]);
                   that.setData({
-                        sellerInfo: res.data[0].info
+                        sellerInfo: res.data[0].userInfo
                   })
             })
       },
@@ -273,10 +273,10 @@ Page({
                                                                         wx.showModal({
                                                                               title: '打赏小程序',
                                                                               content: '请开发者喝阔落？',
-                                                                              showCancel: true, 
-                                                                              cancelText:'下次一定',
-                                                                              confirmText:'现在就去',
-                                                                              confirmColor: '#FFAFD3', 
+                                                                              showCancel: true,
+                                                                              cancelText: '下次一定',
+                                                                              confirmText: '现在就去',
+                                                                              confirmColor: '#FFAFD3',
                                                                               success(res) {
                                                                                     if (res.confirm) {
                                                                                           wx.previewImage({

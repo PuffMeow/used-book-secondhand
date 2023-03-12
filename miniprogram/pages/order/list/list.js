@@ -119,9 +119,9 @@ Page({
                                     success: res => {
                                           wx.showToast({
                                                 title: '取消订单成功',
-                                                icon:'success',
-                                                duration:1000
-                                          })    
+                                                icon: 'success',
+                                                duration: 1000
+                                          })
                                           that.sendCancel(that.data.detail.seller)
                                           that.onShow()
                                     },
@@ -169,7 +169,7 @@ Page({
                         address: that.data.address,
                         describe: that.data.detail.bookinfo.describe,
                         good: that.data.detail.bookinfo.good,
-                        nickName: that.data.detail.buyerInfo.info.nickName,
+                        nickName: that.data.detail.buyerInfo.userInfo.nickName,
                   }
             }).then(res => {
                   console.log("推送消息成功", res)
@@ -189,7 +189,7 @@ Page({
                         address: that.data.address,
                         describe: that.data.detail.bookinfo.describe,
                         good: that.data.detail.bookinfo.good,
-                        nickName: that.data.detail.buyerInfo.info.nickName,
+                        nickName: that.data.detail.buyerInfo.userInfo.nickName,
                   }
             }).then(res => {
                   console.log("推送消息成功", res)
@@ -216,7 +216,7 @@ Page({
                   content: '您确认已收货吗',
                   success(res) {
                         if (res.confirm) {
-                              
+
                               wx.showLoading({
                                     title: '正在处理',
                               })

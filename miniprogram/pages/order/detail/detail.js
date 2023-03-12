@@ -14,8 +14,8 @@ Page({
             status: Number,
             openid: app.openid,
             appreciateCode: '',
-            address:'',
-            buyerInfo:[]
+            address: '',
+            buyerInfo: []
       },
       onLoad: function (e) {
             if (app.openid) {
@@ -26,7 +26,7 @@ Page({
                   console.log("no openid");
                   wx.showModal({
                         title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
+                        content: '该功能需要登录方可使用，是否马上去登录',
                         success(res) {
                               if (res.confirm) {
                                     wx.navigateTo({
@@ -93,7 +93,7 @@ Page({
 
 
       },
-   
+
       /**
        * 获取地址
        */
@@ -109,12 +109,12 @@ Page({
                   })
             }
       },
-      getBuyerInfo(){
+      getBuyerInfo() {
             db.collection('user').where({
-                  _openid:app.openid
+                  _openid: app.openid
             }).get().then(res => {
                   this.setData({
-                        buyerInfo:res.data[0].info
+                        buyerInfo: res.data[0].userInfo
                   })
             })
       },
@@ -150,7 +150,7 @@ Page({
                         if (res.confirm) {
                               wx.showLoading({
                                     title: '正在处理',
-                                    duration:1000
+                                    duration: 1000
                               })
                               wx.cloud.callFunction({
                                     name: 'pay',
@@ -170,9 +170,9 @@ Page({
                                                 success: res => {
                                                       wx.showToast({
                                                             title: '确认收货成功',
-                                                            icon:'success',
-                                                            duration:1000
-                                                          })
+                                                            icon: 'success',
+                                                            duration: 1000
+                                                      })
                                                       that.send()
                                                       that.getdetail(that.data.detail.sellid)
                                                 },
@@ -268,7 +268,7 @@ Page({
                   db.collection('rooms').where({
                         p_b: myid,
                         p_s: sallerid,
-                        deleted :0
+                        deleted: 0
                   }).get().then(res => {
                         console.log(res.data);
                         if (res.data.length > 0) {
@@ -283,7 +283,7 @@ Page({
                                     data: {
                                           p_b: myid,
                                           p_s: sallerid,
-                                          deleted :0
+                                          deleted: 0
                                     },
                               }).then(res => {
                                     console.log(res)

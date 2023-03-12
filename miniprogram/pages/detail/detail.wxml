@@ -1,14 +1,14 @@
 <wxs src="../../common.wxs" module="morejs" />
 <view class="top_contain">
       <!--轮播图-->
-      <swiper indicator-dots='true' autoplay='true' interval='5000' duration='500' circular="true" >
+      <swiper indicator-dots='true' autoplay='true' interval='5000' duration='500' circular="true">
             <block wx:for="{{publishinfo.bookinfo.imgs}}" wx:key="index">
                   <swiper-item class="image">
                         <image src='{{item}}' mode="scaleToFill" bindtap="img" data-src="{{item}}"></image>
                   </swiper-item>
             </block>
       </swiper>
-      
+
       <view class="title text-cut">{{publishinfo.bookinfo.good}}</view>
       <view class="price_box">
             <view class="now_price">￥{{publishinfo.price}}元</view>
@@ -22,16 +22,16 @@
 <!--发布信息-->
 <view hidden="{{!first_title}}">
       <view class="user_box">
-            <image lazy-load src="{{userinfo.info.avatarUrl}}"></image>
+            <image lazy-load src="{{userinfo.userInfo.avatarUrl}}"></image>
             <view class="des_box">
-                  <view class="user_name">{{userinfo.info.nickName}}</view>
-                  <view class="local_box">
+                  <view class="user_name">{{userinfo.userInfo.nickName}}</view>
+                  <!-- <view class="local_box">
                         <image src="/images/local.png"></image>
                         <view>{{userinfo.campus.name}}</view>
-                  </view>
+                  </view> -->
             </view>
             <view class="sex">
-                  <image lazy-load src="{{userinfo.info.gender==0?'/images/none.png':(userinfo.info.gender==1?'/images/boy.png':'/images/girl.png')}}"></image>
+                  <image lazy-load src="{{userinfo.userInfo.gender==0?'/images/none.png':(userinfo.userInfo.gender==1?'/images/boy.png':'/images/girl.png')}}"></image>
             </view>
       </view>
       <view class="time_box">
@@ -90,7 +90,7 @@
 </view>
 
 <!--悬浮聊天功能-->
-<view class="contact_box" bindtap="goo" data-id="{{roomID}}" >
-     <image src="/images/chat.png" ></image>
-     <view>私聊</view>
+<view class="contact_box" bindtap="goo" data-id="{{roomID}}">
+      <image src="/images/chat.png"></image>
+      <view>私聊</view>
 </view>

@@ -7,9 +7,7 @@ Page({
             isExist: '',
             selectPhoto: true,
             systeminfo: app.systeminfo,
-            params: {
-                  imgUrl: new Array(),
-            },
+            imgUrl: [],
             tempFilePaths: [],
             entime: {
                   enter: 600,
@@ -47,9 +45,6 @@ Page({
                   kindid: 0,
                   showorhide: true,
                   tempFilePaths: [],
-                  params: {
-                        imgUrl: new Array(),
-                  },
                   imgUrl: [],
                   kind: [{
                         name: '通用',
@@ -196,7 +191,7 @@ Page({
             if (!app.openid) {
                   wx.showModal({
                         title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
+                        content: '该功能需要登录方可使用，是否马上去登录',
                         success(res) {
                               if (res.confirm) {
                                     wx.navigateTo({
@@ -221,7 +216,7 @@ Page({
                   });
                   return false;
             }
-            if (that.data.params.imgUrl.length === 0) {
+            if (that.data.imgUrl.length === 0) {
                   wx.showToast({
                         title: '请选择图片',
                         icon: 'none',
@@ -306,7 +301,6 @@ Page({
             })
       },
       doUpload(filePath) {
-            const that = this;
             if (!app.openid) {
                   wx.showToast({
                         title: '请先登录',
@@ -327,16 +321,8 @@ Page({
                   filePath
             }).then(res => {
                   console.log('[上传文件] 成功：', res)
-                  const {
-                        params
-                  } = that.data;
-                  const {
-                        imgUrl
-                  } = params;
-                  imgUrl.push(res.fileID);
-                  params['imgUrl'] = imgUrl;
-                  that.setData({
-                        params
+                  this.setData({
+                        imgUrl: [...this.data.imgUrl, res.fileID]
                   });
             }).catch(error => {
                   console.error('[上传文件] 失败：', error);
@@ -353,22 +339,23 @@ Page({
             // 还能再选几张图片,初始值设置最大的数量-当前的图片的长度
             let max = MAX_IMG_NUM - this.data.tempFilePaths.length;
             // 选择图片
-            wx.chooseImage({
+            wx.chooseMedia({
                   count: max, // count表示最多可以选择的图片张数
                   sizeType: ['compressed'],
                   sourceType: ['album', 'camera'],
                   success: (res) => {
-                        const tempFiles = res.tempFiles;
-                        const filePath = res.tempFilePaths;
+                        console.log('res:', res)
+                        const filePath = res.tempFiles;
                         //将选择的图片上传
                         filePath.forEach((path, _index) => {
-                              setTimeout(() => that.doUpload(path), _index); //加不同的延迟，避免多图上传时文件名相同
+                              setTimeout(() => that.doUpload(path.tempFilePath), _index); //加不同的延迟，避免多图上传时文件名相同
                         });
+                        const filePathArr = filePath.map(path => path.tempFilePath)
                         const {
                               tempFilePaths
                         } = that.data;
                         that.setData({
-                              tempFilePaths: tempFilePaths.concat(filePath)
+                              tempFilePaths: tempFilePaths.concat(filePathArr)
                         }, () => {
                               console.log(that.data.tempFilePaths)
                         })
@@ -386,14 +373,14 @@ Page({
       deletePic(e) {
             console.log(e);
             let index = e.currentTarget.dataset.index
-            let imgUrl = this.data.params.imgUrl
+            let imgUrl = this.data.imgUrl
             const {
                   tempFilePaths
             } = this.data;
             tempFilePaths.splice(index, 1);
             imgUrl.splice(index, 1)
             this.setData({
-                  ['params.imgUrl']: imgUrl,
+                  imgUrl,
                   tempFilePaths,
             })
             // 当添加的图片达到设置最大的数量时,添加按钮隐藏,不让新添加图片

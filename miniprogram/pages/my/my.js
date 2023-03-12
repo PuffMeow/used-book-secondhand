@@ -14,9 +14,6 @@ Page({
             userInfo: null
       },
       onShow() {
-
-      },
-      onLoad: function () {
             const openid = wx.getStorageSync('openid')
             const userInfo = wx.getStorageSync('userInfo')
             this.setData({
@@ -24,11 +21,14 @@ Page({
                   userInfo
             })
       },
+      onLoad: function () {
+
+      },
       goo() {
             if (!app.openid) {
                   wx.showModal({
                         title: '温馨提示',
-                        content: '该功能需要注册方可使用，是否马上去注册',
+                        content: '该功能需要登录方可使用，是否马上去登录',
                         success(res) {
                               if (res.confirm) {
                                     wx.navigateTo({

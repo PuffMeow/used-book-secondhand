@@ -133,35 +133,34 @@ Page({
             }
       },
       getList() {
-            console.log("调用了getlist")
-            let that = this;
-            if (that.data.collegeCur == -2) {
+            if (this.data.collegeCur == -2) {
                   var collegeid = _.neq(-2); //除-2之外所有
             } else {
-                  var collegeid = that.data.collegeCur + '' //小程序搜索必须对应格式
+                  var collegeid = this.data.collegeCur + '' //小程序搜索必须对应格式
             }
             db.collection('publish').where({
                   status: 0,
                   dura: _.gt(new Date().getTime()),
                   collegeid: collegeid
             }).orderBy('creat', 'desc').limit(20).get({
-                  success: function (res) {
+                  success: res => {
+                        console.log(res)
                         wx.stopPullDownRefresh(); //暂停刷新动作
                         if (res.data.length == 0) {
-                              that.setData({
+                              this.setData({
                                     nomore: true,
                                     list: [],
                               })
                               return false;
                         }
                         if (res.data.length < 20) {
-                              that.setData({
+                              this.setData({
                                     nomore: true,
                                     page: 0,
                                     list: res.data,
                               })
                         } else {
-                              that.setData({
+                              this.setData({
                                     page: 0,
                                     list: res.data,
                                     nomore: false,
@@ -244,7 +243,6 @@ Page({
       //跳转轮播链接
       goweb(e) {
             const url = e.currentTarget.dataset.web.url
-            console.log(e.currentTarget.dataset.web.url)
             if (!url) {
                   return
             }
@@ -254,7 +252,6 @@ Page({
       },
 
       onShow() {
-
             this.getList()
             this.getTip()
       },

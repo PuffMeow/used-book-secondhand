@@ -223,11 +223,11 @@
       color: rgb(255, 0, 0);
 }
 
-.card_buy {
+/* .card_buy {
       padding-right: 10rpx;
       width: 40rpx;
       height: 40rpx;
-}
+} */
 
 .list_box {
       width: 100%;

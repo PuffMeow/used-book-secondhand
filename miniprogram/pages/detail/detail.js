@@ -20,7 +20,7 @@ Page({
             avatarUrl: '',
             buyerInfo: [],
             isExist: Boolean,
-            address:''
+            address: ''
       },
       onLoad(e) {
             obj = e;
@@ -88,19 +88,19 @@ Page({
                                     roomID: res.data[0]._id
                               })
                               db.collection("rooms").doc(res.data[0]._id).update({
-                                    data: {
-                                      deleted:0
-                                    },
-                                  }),
-                              wx.navigateTo({
-                                    url: 'room/room?id=' + this.data.roomID,
-                              })
+                                          data: {
+                                                deleted: 0
+                                          },
+                                    }),
+                                    wx.navigateTo({
+                                          url: 'room/room?id=' + this.data.roomID,
+                                    })
                         } else {
                               db.collection('rooms').add({
                                     data: {
                                           p_b: myid,
                                           p_s: sallerid,
-                                          deleted:0
+                                          deleted: 0
                                     },
                               }).then(res => {
                                     console.log(res)
@@ -131,30 +131,28 @@ Page({
       },
       //获取发布信息
       getPublish(e) {
-            let that = this;
             db.collection('publish').doc(e).get({
-                  success: function (res) {
-                        that.setData({
+                  success: res => {
+                        this.setData({
                               collegeName: JSON.parse(config.data).college[parseInt(res.data.collegeid) + 1],
                               publishinfo: res.data
                         })
-                        that.getSeller(res.data._openid)
+                        this.getSeller(res.data._openid)
                   }
             })
       },
       //获取卖家信息
-      getSeller(m, n) {
-            let that = this;
+      getSeller(openid) {
             db.collection('user').where({
-                  _openid: m
+                  _openid: openid
             }).get({
-                  success: function (res) {
+                  success: res => {
+
                         console.log(res.data[0]._openid);
-                        that.setData({
+                        this.setData({
                               userinfo: res.data[0],
                               goodssaller: res.data[0]._openid
                         })
-                        that.getBook(n)
                   }
             })
       },
@@ -287,7 +285,7 @@ Page({
                                                       avatarUrl: res.userInfo.avatarUrl,
                                                 })
                                           },
-                                          fail(){
+                                          fail() {
                                                 console.log("调用getUserinfo失败")
                                           }
                                     })
@@ -299,24 +297,33 @@ Page({
                                           },
                                           success() {
                                                 wx.hideLoading();
-                                                // that.getList();
+
+                                                const {
+                                                      publishinfo: {
+                                                            price,
+                                                            deliveryid,
+                                                            place,
+                                                            bookinfo,
+                                                            _openid,
+                                                            _id
+                                                      },
+                                                      buyerInfo,
+                                                      place: psplace
+                                                } = that.data
+
                                                 db.collection('order').add({
                                                       data: {
                                                             creat: new Date().getTime(),
                                                             status: 1, //0在售；1买家已付款，但卖家未发货；2买家确认收获，交易完成；
-                                                            price: that.data.publishinfo.price, //售价
-                                                            deliveryid: that.data.publishinfo.deliveryid, //0自1配
-                                                            ztplace: that.data.publishinfo.place, //自提时地址
-                                                            psplace: that.data.place, //配送时买家填的地址
-                                                            bookinfo: {
-                                                                  describe: that.data.publishinfo.bookinfo.describe,
-                                                                  pic: that.data.publishinfo.bookinfo.pic,
-                                                                  good: that.data.publishinfo.bookinfo.good,
-                                                            },
-                                                            buyerInfo: that.data.buyerInfo,
-                                                            seller: that.data.publishinfo._openid,
-                                                            sellid: that.data.publishinfo._id,
-                                                            _id: that.data.publishinfo._id,
+                                                            price, //售价
+                                                            deliveryid, //0自1配
+                                                            ztplace: place, //自提时地址
+                                                            psplace, //配送时买家填的地址
+                                                            bookinfo,
+                                                            buyerInfo,
+                                                            seller: _openid,
+                                                            sellid: _id,
+                                                            _id: _id,
                                                       },
                                                       success() {
                                                             that.getAddress()
@@ -424,10 +431,10 @@ Page({
                   data: {
                         openid: openid,
                         status: '买家已预定', //0在售；1买家已付款，但卖家未发货；2买家确认收获，交易完成；
-                        address:that.data.address,
+                        address: that.data.address,
                         describe: that.data.publishinfo.bookinfo.describe,
                         good: that.data.publishinfo.bookinfo.good,
-                        nickName: that.data.buyerInfo.info.nickName,
+                        nickName: that.data.buyerInfo.userInfo.nickName,
                         color: 'red'
                   }
             }).then(res => {
@@ -463,9 +470,7 @@ Page({
                                           if (res.data.length !== 0) {
                                                 app.openid = re.result;
                                                 app.userinfo = res.data[0];
-                                                console.log(app)
                                           }
-                                          console.log(res)
                                     }
                               })
                         }
